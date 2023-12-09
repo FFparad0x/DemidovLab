@@ -15,4 +15,4 @@ python3.10 -m venv venv
 source venv/bin/activate
 pip install -r req-serv.text
 
-uvicorn main:app --reload
+uvicorn main:app --reload --port 80
