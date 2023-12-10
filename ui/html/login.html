@@ -1,0 +1,57 @@
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
+
+
+
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+    <script>
+
+      function handleSubmit(event) {
+
+      event.preventDefault();
+      const form = document.forms.namedItem("loginfo");
+      const formElement = document.querySelector("form");
+      var formData = new FormData(event.target);
+      formData.append("grant_type","password")
+      var request = new XMLHttpRequest();
+      request.open("POST", "/token", false);
+
+      request.onload = function() {
+
+        if (request.status === 200) {
+
+            var response = JSON.parse(request.responseText);
+            console.log(response)
+
+            var token = response['access_token'];
+            localStorage.setItem("bearer_token", token);
+            window.location.href = "/";
+        } else {
+            // show an error message
+            alert("Invalid username or password.");
+        }
+      };
+      request.send(formData);
+      }
+    </script>
+
+  </head>
+  <body class="text-center d-flex justify-content-center">
+    <form class="form-signin  w-25" onsubmit="handleSubmit(event)" name="loginfo">
+
+  <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+  <label for="inputEmail" class="sr-only">User</label>
+  <input type="text" id="inputEmail" class="form-control" placeholder="User" name="username" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+</form>
+
+</body>
+</html>
