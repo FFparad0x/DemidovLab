@@ -1,0 +1,17 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: ui
+  namespace: default
+  labels:
+    app: ui
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: ui
+  type: ClusterIP
+  sessionAffinity: None
