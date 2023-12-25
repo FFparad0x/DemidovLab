@@ -1,5 +1,5 @@
 #cloud-config
-password: ubuntu
+password: ubuntu@pass01
 cloud_init_modules:
  - migrator
  - seed_random
@@ -25,9 +25,7 @@ users:
     shell: /bin/bash
     lock_passwd: false
 chpasswd:
-  users:
-    - name: api                     # логин пользователя
-      password: Qweasd123            # пароль пользователя
-      type: text
+  list:
+    "api:@Qwerty123&12."
   expire: False
 fqdn: "terraform-vm"
